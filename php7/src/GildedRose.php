@@ -4,7 +4,7 @@ namespace App;
 
 final class GildedRose {
 
-    private $items = [];
+    public $items = [];
 
     public function __construct($items) {
         $this->items = $items;
