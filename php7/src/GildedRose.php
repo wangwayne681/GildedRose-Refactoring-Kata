@@ -14,30 +14,29 @@ final class GildedRose {
     public function updateQuality()
     {
         foreach ($this->items as $item) {
-            if ($item->name == 'Aged Brie' || $item->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                $item->quality = $this->addQuality($item->quality);
-                if ($item->quality < 50) {
-                    if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if ($item->sell_in < 11) {
-                            $item->quality = $this->addQuality($item->quality);
-                        }
-                        if ($item->sell_in < 6) {
-                            $item->quality = $this->addQuality($item->quality);
-                        }
-                    }
-                }
-            } else {
-                if ($item->quality > 0) {
-                    if ($item->name == 'Sulfuras, Hand of Ragnaros') {
-                    } else {
-                        $item->quality = $item->quality - 1;
-                    }
-                }
-            }
-            
             if ($item->name == 'Sulfuras, Hand of Ragnaros') {
             } else {
                 $item->sell_in = $item->sell_in - 1;
+            }
+
+            switch ($item->name) {
+                case 'Aged Brie':
+                    $item->quality = $this->addQuality($item->quality);
+                    break;
+                case 'Backstage passes to a TAFKAL80ETC concert':
+                    $item->quality = $this->addQuality($item->quality);
+                    if ($item->sell_in < 10) {
+                        $item->quality = $this->addQuality($item->quality);
+                    }
+                    if ($item->sell_in < 5) {
+                        $item->quality = $this->addQuality($item->quality);
+                    }
+                    break;
+                case 'Sulfuras, Hand of Ragnaros':
+                    break;
+                default:
+                    $item->quality = $this->decreaseQuality($item->quality);
+                    break;
             }
             
             if ($item->sell_in < 0) {
