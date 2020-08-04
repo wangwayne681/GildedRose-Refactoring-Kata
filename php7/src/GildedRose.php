@@ -9,6 +9,10 @@ final class GildedRose {
      */
     public $items = [];
 
+    /**
+     * GildedRose constructor.
+     * @param array $items
+     */
     public function __construct(array $items)
     {
         $this->items = $items;
@@ -21,4 +25,3 @@ final class GildedRose {
         }
     }
 }
-
